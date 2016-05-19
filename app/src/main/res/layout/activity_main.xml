@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="锁屏功能"
+                android:textColor="@color/text_color"
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/bt_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="未开启"/>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray_divier_slow"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="悬浮返回按钮"
+                android:textColor="@color/text_color"
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/bt_floatView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="未开启"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray_divier_slow"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_me"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="about author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <WebView
+        android:id="@+id/webView"
+        android:layout_above="@id/bt_me"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+    </WebView>
+
+
+    <TextView
+        android:layout_above="@id/webView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@android:color/black"
+        android:text="使用说明"/>
+
+
+</RelativeLayout>

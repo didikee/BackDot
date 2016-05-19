@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BackDot</string>
+    <string name="app_name_zh">返回点</string>
+    <string name="decerption">激活辅助服务</string>
+</resources>
