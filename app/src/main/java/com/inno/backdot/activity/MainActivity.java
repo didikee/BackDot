@@ -2,7 +2,6 @@ package com.inno.backdot.activity;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,15 +12,16 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.inno.backdot.R;
-import com.inno.backdot.config.AppHelper;
+import com.inno.backdot.config.AppConfig;
+import com.inno.backdot.config.AppHolder;
 import com.inno.backdot.engine.Utils;
 import com.inno.backdot.reciver.DotReceiver;
+import com.inno.backdot.utils.SPUtil;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button mBt_Lock;
     private Button mBt_FloatView;
-    private DevicePolicyManager dpm;
     private ComponentName who;
     private WebView mWeb;
     private Button mBt_me;
@@ -35,14 +35,28 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         initView();
+        initFirstTime();
 //        initAdmin();
         who = new ComponentName(MainActivity.this,DotReceiver.class);
-        dpm = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+    }
+
+    private void initFirstTime() {
+        int count = SPUtil.getInt(this, AppConfig.USER_COUNT, 0);
+        if (count==0){
+            SPUtil.putInt(this,AppConfig.ACTION_BACK,1);
+            SPUtil.putInt(this,AppConfig.ACTION_LOCK,2);
+            SPUtil.putInt(this,AppConfig.ACTION_LONG_CLICK,3);
+            SPUtil.putInt(this,AppConfig.ACTION_PULL_DOWN,4);
+            SPUtil.putInt(this,AppConfig.ACTION_PULL_UP,5);
+        }else {
+            count++;
+            SPUtil.putInt(this,AppConfig.USER_COUNT,count);
+        }
     }
 
     private void initAdmin() {
-        AppHelper.isActive=dpm.isAdminActive(who);
-        if (AppHelper.isActive){
+        AppConfig.isActive= AppHolder.mDevicePolicyManager.isAdminActive(who);
+        if (AppConfig.isActive){
             mBt_Lock.setText("已开启");
             mBt_Lock.setEnabled(false);
         }
@@ -88,9 +102,9 @@ public class MainActivity extends AppCompatActivity {
         mBt_me.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                boolean adminActive = dpm.isAdminActive(who);
+                boolean adminActive = AppHolder.mDevicePolicyManager.isAdminActive(who);
                 if (adminActive){
-                    dpm.removeActiveAdmin(who);
+                    AppHolder.mDevicePolicyManager.removeActiveAdmin(who);
                     Toast.makeText(MainActivity.this, "已经移除,你可以重新激活,或者执行卸载操作.", Toast.LENGTH_LONG).show();
                 }else {
                     Toast.makeText(MainActivity.this, "未激活,请先执行开启锁屏,执行激活操作.", Toast.LENGTH_LONG).show();
@@ -103,10 +117,10 @@ public class MainActivity extends AppCompatActivity {
         // 判断该组件是否有系统管理员的权限
 //        dpm = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        boolean adminActive = dpm.isAdminActive(who);
+        boolean adminActive = AppHolder.mDevicePolicyManager.isAdminActive(who);
         if (adminActive){
             Toast.makeText(MainActivity.this, "the admin is already exit! do not do it!", Toast.LENGTH_SHORT).show();
-            AppHelper.isActive=true;
+            AppConfig.isActive=true;
             return;
         }
 
@@ -126,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        AppHelper.isActive = dpm.isAdminActive(who);
-        if (AppHelper.isActive){
+        AppConfig.isActive = AppHolder.mDevicePolicyManager.isAdminActive(who);
+        if (AppConfig.isActive){
             Log.e("@@@","result+已激活");
         }else {
             Log.e("@@@","result+未激活");

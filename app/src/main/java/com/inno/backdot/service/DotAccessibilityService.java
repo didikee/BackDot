@@ -41,4 +41,6 @@ public class DotAccessibilityService extends AccessibilityService {
     protected boolean onKeyEvent(KeyEvent event) {
         return super.onKeyEvent(event);
     }
+
+
 }

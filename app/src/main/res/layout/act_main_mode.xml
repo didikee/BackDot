@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+    android:id="@+id/re_1"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/selector_item_normal"
+    >
+
+    <TextView
+        android:id="@+id/tv2_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:text="返回键"
+        android:textColor="@color/text_color"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv2_1_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@id/tv2_1"
+        android:text="(单击)"
+        android:textColor="@color/gray_divier"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/arrow_right"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
+    <include layout="@layout/divier_gray"></include>
+
+    <RelativeLayout
+        android:id="@+id/re_2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/selector_item_normal"
+        >
+
+        <TextView
+            android:id="@+id/tv2_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="锁屏"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv2_2_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/tv2_2"
+            android:text="(双击)"
+            android:textColor="@color/gray_divier"
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_right"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+    <include layout="@layout/divier_gray"></include>
+
+    <RelativeLayout
+        android:id="@+id/re_3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/selector_item_normal"
+        >
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="回桌面"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv3_3_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/tv3"
+            android:text="(长按震动后释放)"
+            android:textColor="@color/gray_divier"
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_right"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+    <include layout="@layout/divier_gray"></include>
+
+    <RelativeLayout
+        android:id="@+id/re_4"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/selector_item_normal"
+        >
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="显示下拉通知"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv4_4_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/tv4"
+            android:text="(长按震动后向下移动)"
+            android:textColor="@color/gray_divier"
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_right"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+    <include layout="@layout/divier_gray"></include>
+
+    <RelativeLayout
+        android:id="@+id/re_5"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/selector_item_normal"
+        >
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="显示最近"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv5_5_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/tv5"
+            android:text="(单击)"
+            android:textColor="@color/gray_divier"
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_right"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+    <include layout="@layout/divier_gray"></include>
+</LinearLayout>
