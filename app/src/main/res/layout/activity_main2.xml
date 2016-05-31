@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.inno.backdot.view.OverScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+                                      android:id="@+id/rootView"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,12 +48,13 @@
             android:textColor="@color/text_color"
             android:textSize="14sp"/>
         <TextView
+            android:id="@+id/tv_lock_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/tv_lock"
             android:layout_margin="5dp"
-            android:text="(已关闭)"
+            android:text="( 已关闭 )"
             android:textColor="@color/gray_divier"
             android:textSize="12sp"/>
         <Switch
@@ -70,12 +79,13 @@
             android:textColor="@color/text_color"
             android:textSize="14sp"/>
         <TextView
+            android:id="@+id/tv_dot_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_toRightOf="@id/tv_dot"
             android:layout_centerVertical="true"
-            android:text="(已关闭)"
+            android:text="( 已关闭 )"
             android:textColor="@color/gray_divier"
             android:textSize="12sp"/>
         <Switch
@@ -87,10 +97,12 @@
     </RelativeLayout>
     <include layout="@layout/divier_gray"></include>
     <LinearLayout
+        android:id="@+id/ll_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/gray_main"
+        android:background="@drawable/selector_item_revser"
+        android:clickable="true"
         android:padding="10dp"
         android:minHeight="35dp">
         <TextView
@@ -112,18 +124,19 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_right_white"
+            android:src="@drawable/arrow_right"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="5dp"
             android:scaleType="centerInside"/>
     </LinearLayout>
-
     <!--mode-->
     <LinearLayout
+        android:id="@+id/ll_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/gray_main"
+        android:background="@drawable/selector_item_revser"
+        android:clickable="true"
         android:padding="10dp"
         android:minHeight="35dp">
         <TextView
@@ -142,9 +155,62 @@
             android:textColor="@color/gray_divier"
             android:textSize="12sp"/>
     </LinearLayout>
-<ListView
-    android:id="@+id/listview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray_divier_slow"/>
+<include layout="@layout/act_main_mode"/>
+        <LinearLayout
+            android:id="@+id/ll_help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/selector_item_revser"
+            android:clickable="true"
+            android:padding="10dp"
+            android:minHeight="35dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="帮助"
+                android:textColor="@color/text_color"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="( 使用说明 )"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/gray_divier"
+                android:textSize="12sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_right"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerInside"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_me"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/selector_item_revser"
+            android:clickable="true"
+            android:padding="10dp"
+            android:minHeight="35dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关于作者"
+                android:textColor="@color/text_color"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"/>
 
-</LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.inno.backdot.view.OverScrollView>

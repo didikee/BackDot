@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="vertical">
 
     <RelativeLayout
@@ -9,6 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:background="@drawable/selector_item_normal"
+    android:clickable="true"
     >
 
     <TextView
@@ -17,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
-        android:text="返回键"
+        android:text="单击"
         android:textColor="@color/text_color"
         android:textSize="14sp"/>
 
@@ -28,7 +29,7 @@
         android:layout_centerVertical="true"
         android:layout_margin="5dp"
         android:layout_toRightOf="@id/tv2_1"
-        android:text="(单击)"
+        android:text="( 返回键 )"
         android:textColor="@color/gray_divier"
         android:textSize="12sp"/>
 
@@ -56,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:text="锁屏"
+            android:text="双击"
             android:textColor="@color/text_color"
             android:textSize="14sp"/>
 
@@ -67,7 +68,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:layout_toRightOf="@id/tv2_2"
-            android:text="(双击)"
+            android:text="( 锁屏 )"
             android:textColor="@color/gray_divier"
             android:textSize="12sp"/>
 
@@ -95,18 +96,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:text="回桌面"
+            android:text="长按震动后释放"
             android:textColor="@color/text_color"
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tv3_3_info"
+            android:id="@+id/tv2_3_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:layout_toRightOf="@id/tv3"
-            android:text="(长按震动后释放)"
+            android:text="( 回到桌面 )"
             android:textColor="@color/gray_divier"
             android:textSize="12sp"/>
 
@@ -134,18 +135,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:text="显示下拉通知"
+            android:text="长按震动后向下移动"
             android:textColor="@color/text_color"
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tv4_4_info"
+            android:id="@+id/tv2_4_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:layout_toRightOf="@id/tv4"
-            android:text="(长按震动后向下移动)"
+            android:text="( 显示下拉通知 )"
             android:textColor="@color/gray_divier"
             android:textSize="12sp"/>
 
@@ -173,18 +174,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:text="显示最近"
+            android:text="长按震动后向上移动"
             android:textColor="@color/text_color"
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tv5_5_info"
+            android:id="@+id/tv2_5_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:layout_toRightOf="@id/tv5"
-            android:text="(单击)"
+            android:text="( 显示最近应用 )"
             android:textColor="@color/gray_divier"
             android:textSize="12sp"/>
 

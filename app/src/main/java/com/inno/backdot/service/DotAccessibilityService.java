@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.inno.backdot.config.AppHolder;
 import com.inno.backdot.engine.Dot;
 
 public class DotAccessibilityService extends AccessibilityService {
@@ -34,6 +35,7 @@ public class DotAccessibilityService extends AccessibilityService {
     protected void onServiceConnected() {
         Log.e("@@@", "onServiceConnected() called ");
         Dot.getInstance(getApplicationContext()).setAccessbilityServier(this);
+        AppHolder.getinstance().setASB(this);
         startService(new Intent(this,WindowService.class));
     }
 
@@ -42,5 +44,9 @@ public class DotAccessibilityService extends AccessibilityService {
         return super.onKeyEvent(event);
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        AppHolder.abs=null;
+    }
 }

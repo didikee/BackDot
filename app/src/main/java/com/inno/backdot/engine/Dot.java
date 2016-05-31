@@ -7,6 +7,8 @@ import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -16,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inno.backdot.R;
+import com.inno.backdot.config.AppHolder;
+import com.inno.backdot.utils.DisplayUtil;
 
 /**
  * Created by didik on 2016/5/12.
@@ -33,12 +37,15 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
     private Handler mHandler;
     private static AccessibilityService acs;
     private static DevicePolicyManager dpm;
+    private static Vibrator vibrator;
+    private static boolean isVibratored=false;
 
     private Dot(Context mContext){
         this.mContext=mContext;
         this.windowManager= (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         this.mHandler=new Handler();
         this.dpm= (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        this.vibrator= (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         mGesture=new GestureDetector(mContext,this);
         mGesture.setOnDoubleTapListener(this);
         initWindow();
@@ -52,9 +59,14 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
         }
     }
 
+    public void setInstanceNull(){
+        mDot=null;
+    }
+
     public void removeView(){
         if (windowManager!=null && imageView!=null){
             windowManager.removeView(imageView);
+            imageView=null;
         }
     }
 
@@ -82,6 +94,20 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
     private void actionLock(){
         if (dpm!=null){
             dpm.lockNow();
+        }
+    }
+
+    /**打开通知中心**/
+    private void actionPull2Notification(){
+        if (acs!=null){
+            acs.performGlobalAction(AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS);
+        }
+    }
+
+    /**回到桌面**/
+    private void action2Home(){
+        if (acs!=null){
+            acs.performGlobalAction(AccessibilityService.GLOBAL_ACTION_HOME);
         }
     }
 
@@ -127,8 +153,10 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
         params.x = 0;
         params.y = 0;
         //悬浮窗的宽高
-        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+//        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.width= DisplayUtil.dp2px(mContext,55);
+        params.height= DisplayUtil.dp2px(mContext,55);
 
         //设置透明
         params.format = PixelFormat.TRANSPARENT;
@@ -148,6 +176,8 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
             private float tranX; //悬浮窗移动位置的相对值
             private float tranY;
 
+            private float preY=0;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 boolean ret = true;
@@ -157,11 +187,16 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
                         // 获取按下时的X，Y坐标
                         lastX = event.getRawX();
                         lastY = event.getRawY();
+
+                        preY=lastY;
                         break;
                     case MotionEvent.ACTION_MOVE:
                         // 获取移动时的X，Y坐标
                         nowX = event.getRawX();
                         nowY = event.getRawY();
+                        if (preY==0){
+                            preY=nowY;
+                        }
                         // 计算XY坐标偏移量
                         tranX = nowX - lastX;
                         tranY = nowY - lastY;
@@ -175,7 +210,24 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
                         lastY = nowY;
                         break;
                     case MotionEvent.ACTION_UP:
-
+                        float dy=nowY-preY;
+                        Log.e("@@@","dy:"+dy);
+                        if (isVibratored){
+                            if (dy>10){
+                                //down
+                                actions(AppHolder.actions[3]);
+                            }else if (dy<-10){
+                                //up
+                                actions(AppHolder.actions[4]);
+                            }else {
+                                //longClick
+                                actions(AppHolder.actions[2]);
+                            }
+                            isVibratored=false;
+                        }
+                        //根据移动的位置来判断
+                        dy=0;
+                        tranY=0;
                         break;
                 }
                 return ret;
@@ -183,12 +235,36 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
         });
     }
 
+    private void actions(int what){
+        Log.e("@@@","what:"+what);
+        switch (what){
+            case 1:
+                actionBack();
+                break;
+            case 2:
+                actionLock();
+                break;
+            case 3:
+                action2Home();
+                break;
+            case 4:
+                actionPull2Notification();
+                break;
+            case 5:
+                actionRecent();
+                break;
+            default:
+                break;
+        }
+    }
+
     @SuppressLint("NewApi")
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
 //        Toast.makeText(mContext, "onSingleTapConfirmed", Toast.LENGTH_SHORT).show();
         //返回上一级
-        actionBack();
+//        actionBack();
+        actions(AppHolder.actions[0]);
         return false;
     }
 
@@ -196,7 +272,8 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
     public boolean onDoubleTap(MotionEvent e) {
 //        Toast.makeText(mContext, "onDoubleTap", Toast.LENGTH_SHORT).show();
         //锁屏
-        actionLock();
+//        actionLock();
+        actions(AppHolder.actions[1]);
         return false;
     }
 
@@ -229,7 +306,9 @@ public class Dot implements GestureDetector.OnDoubleTapListener,GestureDetector.
     public void onLongPress(MotionEvent e) {
 //        Toast.makeText(mContext, "onLongPress", Toast.LENGTH_SHORT).show();
         //历史应用(相当于长按菜单键)
-        actionRecent();
+//        actionRecent();
+        vibrator.vibrate(200);
+        isVibratored=true;
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.view.accessibility.AccessibilityManager;
 
 import com.inno.backdot.engine.Dot;
 
+
 public class WindowService extends Service {
 
 
@@ -24,10 +25,13 @@ public class WindowService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
         mDot = Dot.getInstance(this);
         registerListener();
         return super.onStartCommand(intent, flags, startId);
     }
+
+
 
     private void registerListener() {
         AccessibilityManager as= (AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE);
@@ -49,6 +53,7 @@ public class WindowService extends Service {
         super.onDestroy();
         if (mDot != null) {
             mDot.removeView();
+            mDot.setInstanceNull();
         }
     }
 }

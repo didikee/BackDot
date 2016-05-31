@@ -2,7 +2,6 @@ package com.inno.backdot.engine;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -29,9 +28,9 @@ public class Utils {
     public static boolean isServiceActive(Context context,String serviceName){
         ActivityManager mAM= (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         ArrayList<ActivityManager.RunningServiceInfo> runningServices = (ArrayList
-                <ActivityManager.RunningServiceInfo>) mAM.getRunningServices(50);
+                <ActivityManager.RunningServiceInfo>) mAM.getRunningServices(Integer.MAX_VALUE);
         for (int i=0;i<runningServices.size();i++){
-            Log.e("@@@","+++"+runningServices.get(i).service.getClassName().toString());
+//            Log.e("@@@","+++"+runningServices.get(i).service.getClassName().toString());
             if (runningServices.get(i).service.getClassName().toString().equalsIgnoreCase(serviceName)){
                 return  true;
             }
